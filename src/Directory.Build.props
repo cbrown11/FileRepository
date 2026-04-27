@@ -1,0 +1,15 @@
+<Project>
+  <PropertyGroup>
+    <IsPackable>true</IsPackable>
+    <Authors>cbrown11</Authors>
+    <Description>$(MSBuildProjectName) — part of the FileRepository libraries.</Description>
+    <PackageTags>file-repository;storage</PackageTags>
+    <RepositoryUrl>https://github.com/cbrown11/FileRepository</RepositoryUrl>
+    <RepositoryType>git</RepositoryType>
+    <PackageReadmeFile>README.md</PackageReadmeFile>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Include="$(MSBuildThisFileDirectory)..\README.md" Pack="true" PackagePath="\" />
+  </ItemGroup>
+</Project>
