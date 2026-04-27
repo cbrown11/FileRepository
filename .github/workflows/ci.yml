@@ -1,3 +1,4 @@
+# Builds and tests FileRepository.sln (net10.0) on ubuntu-latest. Private packages need GPR access (see Setup .NET step).
 name: CI
 
 on:

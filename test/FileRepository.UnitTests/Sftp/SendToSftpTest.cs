@@ -45,7 +45,7 @@ namespace FileRepository.UnitTests.Sftp
                 {
                     uploadStream = (Stream)i.Arguments[0];
                 }));
-            encryptionConfig.Setup(x => x.PublicKeyFullPath).Returns(@"Keys\0xE12E7127-public.asc");
+            encryptionConfig.Setup(x => x.PublicKeyFullPath).Returns(Path.Combine(AppContext.BaseDirectory, "Keys", "0xE12E7127-public.asc"));
             SUT = new SftpFileRepository(mockSftpClient.Object, mockFileRepository.Object, new PgpEncryptionByFile(encryptionConfig.Object));
         }
 

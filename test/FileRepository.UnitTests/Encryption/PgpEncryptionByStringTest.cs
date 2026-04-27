@@ -26,8 +26,8 @@ namespace FileRepository.UnitTests.Encryption
             mockStream = new MemoryStream(Encoding.UTF8.GetBytes(testContent));
 
   
-            var pub = Base64Encode(File.ReadAllText(@"Keys\0xE12E7127-public.asc"));
-            var priv = Base64Encode(File.ReadAllText(@"Keys\0xE12E7127-private.asc"));
+            var pub = Base64Encode(File.ReadAllText(Path.Combine(AppContext.BaseDirectory, "Keys", "0xE12E7127-public.asc")));
+            var priv = Base64Encode(File.ReadAllText(Path.Combine(AppContext.BaseDirectory, "Keys", "0xE12E7127-private.asc")));
             encryptionConfig.Setup(x => x.PublicKey).Returns(pub);
             encryptionConfig.Setup(x => x.PrivateKey).Returns(priv);
             encryptionConfig.Setup(x => x.Password).Returns(@"knightfrank");

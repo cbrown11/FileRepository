@@ -1,6 +1,7 @@
 using FileRepository.Convertors;
 using FileRepository.UnitTests.Convertors.Dtos;
 using FluentAssertions;
+using System.IO;
 using System.Net.Security;
 using System.Text;
 
@@ -15,7 +16,7 @@ namespace FileRepository.UnitTests.Convertors
         [TestMethod]
         public void IsValid_OnSimpleCsv()
         {
-            var fullPath = $@"Convertors\csv\test.csv";
+            var fullPath = Path.Combine(AppContext.BaseDirectory, "Convertors", "csv", "test.csv");
             if (!File.Exists(fullPath)) throw new FileNotFoundException(fullPath);
             var testContent = File.ReadAllText(fullPath);
             var mem = new MemoryStream(Encoding.UTF8.GetBytes(testContent));
@@ -31,7 +32,7 @@ namespace FileRepository.UnitTests.Convertors
         [TestMethod]
         public void IsValid_OnComplexCsv()
         {
-            var fullPath = $@"Convertors\csv\AddOnly_Employee_DCDD.csv";
+            var fullPath = Path.Combine(AppContext.BaseDirectory, "Convertors", "csv", "AddOnly_Employee_DCDD.csv");
             if (!File.Exists(fullPath)) throw new FileNotFoundException(fullPath);
             var testContent = File.ReadAllText(fullPath);
             var mem = new MemoryStream(Encoding.UTF8.GetBytes(testContent));

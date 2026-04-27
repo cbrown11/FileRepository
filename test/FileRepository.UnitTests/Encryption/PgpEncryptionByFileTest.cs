@@ -27,8 +27,8 @@ namespace FileRepository.UnitTests.Encryption
             mockStream = new MemoryStream(Encoding.UTF8.GetBytes(testContent));
 
            // PgpEncryptionUtils.GenerateKey("")
-            encryptionConfig.Setup(x => x.PublicKeyFullPath).Returns(@"Keys\0xE12E7127-public.asc");
-            encryptionConfig.Setup(x => x.PrivateKeyFullPath).Returns(@"Keys\0xE12E7127-private.asc");
+            encryptionConfig.Setup(x => x.PublicKeyFullPath).Returns(Path.Combine(AppContext.BaseDirectory, "Keys", "0xE12E7127-public.asc"));
+            encryptionConfig.Setup(x => x.PrivateKeyFullPath).Returns(Path.Combine(AppContext.BaseDirectory, "Keys", "0xE12E7127-private.asc"));
             encryptionConfig.Setup(x => x.Password).Returns(@"knightfrank");
             SUT = new PgpEncryptionByFile(encryptionConfig.Object);
         }
