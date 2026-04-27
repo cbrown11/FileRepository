@@ -1,6 +1,6 @@
 name: Publish package
 
-# Pushes FileRepository and FileRepository.InMemory NuGet packages to GitHub Packages.
+# Pushes every packable library under src/ to GitHub Packages (same four-part version for all).
 # NuGet/package version = Major.Minor.Patch.CommitsSinceVersionSource (e.g. 2.0.3.14), not GitVersion's default -ci0014 label. After push from main, tags v{version} if absent. Triggers: push to main, tag v*, release published, manual.
 
 on:
@@ -88,10 +88,13 @@ jobs:
           out="${{ github.workspace }}/artifacts"
           mkdir -p "$out"
           ver="${{ steps.pkgver.outputs.version }}"
-          # Core first so FileRepository.InMemory.nuspec lists a matching FileRepository package dependency.
+          # Dependency order: core and encryption first; adapters last (nuspec package deps match published versions).
           for proj in \
             "src/FileRepository/FileRepository.csproj" \
-            "src/FileRepository.InMemory/FileRepository.InMemory.csproj"
+            "src/FileRepository.Encryption/FileRepository.Encryption.csproj" \
+            "src/FileRepository.Encrption/FileRepository.Encryption.Pgp.csproj" \
+            "src/FileRepository.Zip/FileRepository.Zip.csproj" \
+            "src/FileRepository.Sftp/FileRepository.Sftp.csproj"
           do
             echo "Packing $proj"
             dotnet pack "$proj" -c "${{ env.CONFIGURATION }}" --no-build -o "$out" \
